@@ -1,0 +1,23 @@
+.header {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 50px;
+
+  &-logo {
+    grid-column: span 8;
+    object-fit: contain;
+  }
+
+  &-search-form {
+    grid-column: span 2;
+    &-input {
+      width: 80%;
+    }
+  }
+
+  &-icon {
+    grid-column: span 1;
+    color: grey;
+    place-self: center;
+  }
+}
