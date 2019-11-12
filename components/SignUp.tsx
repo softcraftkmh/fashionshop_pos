@@ -6,9 +6,9 @@ const SignUp = () => {
   return (
     <div className="signUp">
       <div className="signUp-title">
-        <span>Sign In</span>
+        <span>Create Account</span>
         <br />
-        <span>If you already have an account, sign in here</span>
+        <span>If you don't have account, sign up here</span>
       </div>
       <form className="pure-form pure-form-stacked ">
         <label htmlFor="email">Email</label>

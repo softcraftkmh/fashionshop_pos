@@ -1,0 +1,48 @@
+.items {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+
+  &-options {
+    grid-column: span 1;
+    justify-self: center;
+    padding: 50px 0px;
+  }
+
+  &-filteredItems {
+    grid-column: span 5;
+    &-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 50px;
+    }
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: #000000;
+  }
+
+  &-women {
+    li,
+    h3 {
+      color: rgba(238, 176, 206, 0.95);
+    }
+    li:hover,
+    h3:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-men {
+    li,
+    h3 {
+      color: rgba(176, 208, 238, 0.95);
+    }
+    li:hover,
+    h3:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-header {
+    text-align: center;
+  }
+}

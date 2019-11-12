@@ -1,0 +1,15 @@
+.item {
+  grid-column: span 1;
+  text-align: center;
+  justify-self: center;
+  padding: 50px;
+  &-img {
+    width: 160px;
+    height: 190px;
+    object-fit: cover;
+  }
+  &-button-success {
+    background: rgba(131, 227, 98, 0.7);
+    color: #ffffff;
+  }
+}
