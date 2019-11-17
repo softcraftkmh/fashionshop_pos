@@ -1,0 +1,14 @@
+.navBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0px 50px;
+  border-style: solid;
+  border-width: 2px 0px;
+  border-color: #000000;
+
+  &-button {
+    background-color: inherit;
+    color: #ffffff;
+    padding: 16px 0px;
+  }
+}
