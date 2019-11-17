@@ -6,6 +6,7 @@ const index = () => {
   return (
     <div>
       <AdminAppBar></AdminAppBar>
+      <section>{/* TODO: */}</section>
     </div>
   );
 };

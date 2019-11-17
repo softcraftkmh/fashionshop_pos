@@ -1,10 +1,10 @@
 import React from "react";
 
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
-import ShowCase from "../components/ShowCase";
-import FeaturedItems from "../components/FeaturedItems";
-import Footer from "../components/Footer";
+import Header from "components/Header";
+import NavBar from "components/NavBar";
+import ShowCase from "components/ShowCase";
+import FeaturedItems from "components/FeaturedItems";
+import Footer from "components/Footer";
 import "./index.scss";
 
 const index = () => {
