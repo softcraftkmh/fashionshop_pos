@@ -1,0 +1,25 @@
+.formWrapper {
+  margin: 100px auto;
+  width: 500px;
+}
+
+.itemImg {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 16px;
+
+  &-label {
+    grid-column: span 2;
+    text-align: right;
+  }
+
+  &-imgContainer {
+    grid-column: span 3;
+  }
+
+  &-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+}

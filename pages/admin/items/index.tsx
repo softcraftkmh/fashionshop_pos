@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import _ from "lodash";
 
 import AdminAppBar from "components/AdminAppBar";
+import api from "../../../utils/api";
+import helper from "../../../utils/helpers";
 
 import "./index.scss";
+import Item from "components/Item";
 
 interface Item {
   name: string;
@@ -11,6 +16,9 @@ interface Item {
   colors: string;
 }
 
+const imgPlaceholder =
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081";
+
 const index = () => {
   const [item, setItem] = useState<Item>({
     name: "",
@@ -18,17 +26,32 @@ const index = () => {
     sizes: "",
     colors: ""
   });
+  const [image, setImage] = useState<string>("");
 
   const { name, price, sizes, colors } = item;
 
-  const onChangeItem = (event, tag) => {
-    const { value } = event.target;
+  const onChangeItem = (value, tag) => {
     setItem({ ...item, [tag]: value });
   };
 
+  const onDrop = useCallback(async acceptedFiles => {
+    const { data } = await api.getCloudinary();
+    const formData = helper.generateCloudinaryFormData({
+      data,
+      file: acceptedFiles[0]
+    });
+    const { secure_url } = await api.postImage({
+      uploadUrl: data.uploadUrl,
+      formData
+    });
+    setImage(secure_url);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
   const submitItem = event => {
     event.preventDefault();
-    console.log(item);
+    api.postItem({ payload: item });
   };
 
   return (
@@ -44,7 +67,7 @@ const index = () => {
                 type="text"
                 placeholder="Item Name"
                 value={name}
-                onChange={event => onChangeItem(event, "name")}
+                onChange={event => onChangeItem(event.target.value, "name")}
               />
             </div>
 
@@ -55,7 +78,7 @@ const index = () => {
                 type="number"
                 placeholder="Price"
                 value={price}
-                onChange={event => onChangeItem(event, "price")}
+                onChange={event => onChangeItem(event.target.value, "price")}
               />
             </div>
 
@@ -66,7 +89,7 @@ const index = () => {
                 type="text"
                 placeholder="Sizes"
                 value={sizes}
-                onChange={event => onChangeItem(event, "sizes")}
+                onChange={event => onChangeItem(event.target.value, "sizes")}
               />
             </div>
 
@@ -77,8 +100,22 @@ const index = () => {
                 type="text"
                 placeholder="Colors"
                 value={colors}
-                onChange={event => onChangeItem(event, "colors")}
+                onChange={event => onChangeItem(event.target.value, "colors")}
               />
+            </div>
+
+            <div className="pure-control-group ">
+              <div className="itemImg" {...getRootProps()}>
+                <div className="itemImg-label">Image</div>
+                <div className="itemImg-imgContainer">
+                  <input id="image" {...getInputProps()} />
+                  <img
+                    className="itemImg-img"
+                    src={image ? image : imgPlaceholder}
+                    alt="placeholder"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="pure-controls">
