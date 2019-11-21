@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import Item from "../components/Item";
+import Header from "components/Header";
+import NavBar from "components/NavBar";
+import Footer from "components/Footer";
+import Item from "components/Item";
 
 import "./items.scss";
+import api from "utils/api";
 
-const items = ({ filter }) => {
+const Items = ({ items }) => {
+  console.log("TCL: items", items);
+  return items.map(item => (
+    <Item
+      id={item._id}
+      key={item._id}
+      name={item.name}
+      img={item.image}
+      price={item.price}
+    ></Item>
+  ));
+};
+
+const items = ({ filter, data }) => {
   return (
     <>
       <Header></Header>
@@ -56,36 +70,7 @@ const items = ({ filter }) => {
             {filter === "women" ? "Women" : "Men"}
           </h2>
           <div className="items-filteredItems-container">
-            <Item
-              img="/carousel(1).jpg"
-              price="100 USD"
-              name="Blue Jeans"
-            ></Item>
-            <Item
-              img="/carousel(2).jpg"
-              price="100 USD"
-              name="Red Jeans"
-            ></Item>
-            <Item
-              img="/carousel(3).jpg"
-              price="100 USD"
-              name="Green Jeans"
-            ></Item>
-            <Item
-              img="/carousel(4).jpg"
-              price="100 USD"
-              name="Yellow Jeans"
-            ></Item>
-            <Item
-              img="/carousel(5).jpg"
-              price="100 USD"
-              name="Black Jeans"
-            ></Item>
-            <Item
-              img="/carousel(1).jpg"
-              price="100 USD"
-              name="White Jeans"
-            ></Item>
+            <Items items={data.items}></Items>
           </div>
         </div>
       </section>
@@ -94,8 +79,9 @@ const items = ({ filter }) => {
   );
 };
 
-items.getInitialProps = ({ query }) => {
-  return { filter: query.filter };
+items.getInitialProps = async ({ query }) => {
+  const { data } = await api.getItems();
+  return { filter: query.filter, data };
 };
 
 export default items;

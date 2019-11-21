@@ -1,17 +1,17 @@
 import fetch from "isomorphic-unfetch";
 
-const url = "http://localhost:3001/api/items";
+const url = "http://localhost:3001/api/orders";
 
 export default {
-  getItem: async id => {
+  getOrder: async id => {
     return await (await fetch(url + "/" + id)).json();
   },
 
-  getItems: async () => {
+  getOrders: async () => {
     return await (await fetch(url)).json();
   },
 
-  postItem: async ({ payload }) => {
+  postOrder: async ({ payload }) => {
     return await (
       await fetch(url, {
         method: "POST",

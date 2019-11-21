@@ -1,4 +1,4 @@
-.items {
+.cart {
   padding: 50px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -39,13 +39,4 @@
   font-size: 2rem;
   font-weight: bold;
   padding: 10px 50px 0px;
-}
-
-.customerName {
-  font-size: 1.3rem;
-  margin: 20px 0px;
-}
-
-.container {
-  padding: 50px;
 }

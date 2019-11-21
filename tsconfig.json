@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "Components/*": ["/components/*"]
+      "Components/*": ["/components/*"],
+      "Utils/*": ["/utils/*"]
     }
   },
   "exclude": ["node_modules"],

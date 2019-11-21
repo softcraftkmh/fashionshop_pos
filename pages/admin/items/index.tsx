@@ -7,24 +7,25 @@ import api from "../../../utils/api";
 import helper from "../../../utils/helpers";
 
 import "./index.scss";
-import Item from "components/Item";
+import { I_Item, I_Info } from "../../../types";
 
-interface Item {
-  name: string;
-  price: string;
-  sizes: string;
-  colors: string;
-}
+interface Snackbar {}
 
 const imgPlaceholder =
   "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081";
 
 const index = () => {
-  const [item, setItem] = useState<Item>({
+  const [info, setInfo] = useState<I_Info>({
+    desc: "",
+    isShow: false
+  });
+  const [item, setItem] = useState<I_Item>({
     name: "",
     price: "",
     sizes: "",
-    colors: ""
+    colors: "",
+    image: "",
+    id: ""
   });
   const [image, setImage] = useState<string>("");
 
@@ -33,6 +34,20 @@ const index = () => {
   const onChangeItem = (value, tag) => {
     setItem({ ...item, [tag]: value });
   };
+
+  const reset = () => {
+    setInfo({ desc: "", isShow: false });
+    setItem({ name: "", price: "", sizes: "", colors: "", image: "", id: "" });
+    setImage("");
+  };
+
+  useEffect(() => {
+    if (info.isShow) {
+      setTimeout(() => {
+        reset();
+      }, 3000);
+    }
+  }, [info]);
 
   const onDrop = useCallback(async acceptedFiles => {
     const { data } = await api.getCloudinary();
@@ -49,9 +64,17 @@ const index = () => {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const submitItem = event => {
+  const submitItem = async event => {
     event.preventDefault();
-    api.postItem({ payload: item });
+    try {
+      const response = await api.postItem({ payload: { ...item, image } });
+      console.log("TCL: response", response);
+      if (response.status === "success")
+        setInfo({ desc: "Item created successfully.", isShow: true });
+      else setInfo({ desc: "An error occurred.", isShow: true });
+    } catch (error) {
+      setInfo({ desc: "An error occurred.", isShow: true });
+    }
   };
 
   return (
@@ -117,6 +140,8 @@ const index = () => {
                 </div>
               </div>
             </div>
+
+            {info.isShow && <p className="info">{info.desc}</p>}
 
             <div className="pure-controls">
               <button

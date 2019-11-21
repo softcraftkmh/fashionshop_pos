@@ -26,7 +26,15 @@ const Header = () => {
         </Link>
       </div>
       <div className="header-icon">
-        <FontAwesomeIcon className="header-icon" icon={faCartPlus} size="lg" />
+        <Link href="/cart">
+          <a>
+            <FontAwesomeIcon
+              className="header-icon"
+              icon={faCartPlus}
+              size="lg"
+            />
+          </a>
+        </Link>
       </div>
     </section>
   );

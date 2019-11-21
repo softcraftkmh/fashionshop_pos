@@ -1,0 +1,50 @@
+.ItemDetail {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 50px;
+  grid-column-gap: 50px;
+
+  &-info {
+    color: rgb(255, 61, 126);
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 40px;
+  }
+
+  &-img {
+    grid-column: span 1;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  &-infoWrapper {
+    grid-column: span 1;
+    padding: 50px 0px 0px 0px;
+  }
+
+  &-contentContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  &-contentTitle {
+    grid-column: span 3;
+    font-size: 1.1rem;
+    justify-self: end;
+    padding: 0px 20px;
+  }
+
+  &-content {
+    grid-column: span 2;
+    font-weight: bold;
+  }
+
+  &-atcContainer {
+    margin: 20px 0px 0px 0px;
+  }
+
+  &-atc {
+    display: block;
+    margin: 0px auto;
+  }
+}
